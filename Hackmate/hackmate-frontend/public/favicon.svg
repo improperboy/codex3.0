@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="hm-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F46E5"/>
+      <stop offset="0.5" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="mark-grad" x1="16" y1="16" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E0E7FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#hm-grad)"/>
+  <!-- Stylized H and code brackets -->
+  <path d="M19 18V46M45 18V46M19 32H45" stroke="url(#mark-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="32" r="3" fill="#38BDF8"/>
+</svg>

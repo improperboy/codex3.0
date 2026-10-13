@@ -7,21 +7,22 @@ export function EventLayout() {
   const { eventId } = useParams<{ eventId: string }>();
   const { data: dashboard } = useDashboard(eventId ?? null);
 
-  // SSE live update subscription
-  if (eventId) {
-    // Connect to the SSE stream and invalidate queries on events
-    // (handled via the useSSE hook called in DashboardPage)
-  }
-
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      {/* F7.3 Accessibility: skip-to-content for keyboard users */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <TopBar dashboard={dashboard} />
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-        <SideNav eventId={eventId!} />
+        <div className="side-nav">
+          <SideNav eventId={eventId!} />
+        </div>
         <main
           id="main-content"
           style={{ flex: 1, overflowY: "auto", background: "var(--slate-100)" }}
           tabIndex={-1}
+          aria-label="Main content"
         >
           <Outlet />
         </main>

@@ -1,7 +1,6 @@
-import { NavLink } from "react-router-dom";
+﻿import { NavLink } from "react-router-dom";
 
 interface NavItem { to: string; label: string; icon: string; }
-
 interface SideNavProps { eventId: string; }
 
 export function SideNav({ eventId }: SideNavProps) {
@@ -19,14 +18,7 @@ export function SideNav({ eventId }: SideNavProps) {
   ];
 
   return (
-    <nav
-      aria-label="Section navigation"
-      style={{
-        width: 200, flexShrink: 0, background: "#fff",
-        borderRight: "1px solid var(--slate-200)",
-        padding: "16px 0", display: "flex", flexDirection: "column", gap: 2,
-      }}
-    >
+    <nav aria-label="Section navigation">
       {items.map((item) => (
         <NavLink
           key={item.to}
@@ -40,6 +32,7 @@ export function SideNav({ eventId }: SideNavProps) {
             borderLeft: isActive ? "3px solid var(--blue-600)" : "3px solid transparent",
             textDecoration: "none",
             transition: "background .1s",
+            minHeight: 44,
           })}
         >
           <span aria-hidden="true">{item.icon}</span>

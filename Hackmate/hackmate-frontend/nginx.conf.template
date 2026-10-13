@@ -1,0 +1,79 @@
+server {
+    listen 80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Gzip Compression
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_min_length 256;
+    gzip_types
+        text/plain
+        text/css
+        text/xml
+        text/javascript
+        application/javascript
+        application/x-javascript
+        application/json
+        application/xml
+        application/xml+rss
+        image/svg+xml;
+
+    # Security Headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+
+    # Max upload body size for submissions
+    client_max_body_size 50M;
+
+    # Health check endpoint for container orchestrators
+    location = /health {
+        access_log off;
+        add_header Content-Type text/plain;
+        return 200 'OK';
+    }
+
+    # Proxy backend API traffic to the backend gateway
+    # Note: Only proxy backend admin API sub-paths so SPA /admin/* routes serve index.html
+    location ~ ^/(auth|users|teams|scores|rounds|rankings|submissions|announcements|support|chatbot|admin/(?:analytics|settings|venue|export|recommendations|activity-logs|themes))/ {
+        proxy_pass         ${BACKEND_URL};
+        proxy_http_version 1.1;
+        proxy_ssl_server_name on;
+        proxy_set_header   Host              $proxy_host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   Upgrade           $http_upgrade;
+        proxy_set_header   Connection        "upgrade";
+
+        proxy_connect_timeout 60s;
+        proxy_send_timeout    60s;
+        proxy_read_timeout    60s;
+    }
+
+    # Cache static assets with content hashes
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Favicon and static files in root
+    location ~* \.(ico|svg|png|jpg|jpeg|webp|webmanifest|txt)$ {
+        expires 1d;
+        add_header Cache-Control "public, max-age=86400";
+        access_log off;
+    }
+
+    # SPA fallback: never cache index.html
+    location / {
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+    }
+}

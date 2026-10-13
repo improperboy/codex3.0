@@ -1,0 +1,144 @@
+# =============================================================
+# Environment & Secrets
+# =============================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# =============================================================
+# Python / FastAPI / Alembic
+# =============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.Python
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.lcov
+.tox/
+.nox/
+
+# Mypy / type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Alembic
+# (keep alembic.ini and versions/ tracked; ignore local overrides)
+alembic_local.ini
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# =============================================================
+# Node / React / Vite / TypeScript
+# =============================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+
+# Vite cache
+.vite/
+*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Tailwind / PostCSS
+.postcss-cache/
+
+# =============================================================
+# Docker
+# =============================================================
+*.dockerignore
+docker-compose.override.yml
+.docker/
+
+# =============================================================
+# IDEs & Editors
+# =============================================================
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
+.project
+.classpath
+
+# =============================================================
+# OS artifacts
+# =============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# =============================================================
+# Logs & Temp files
+# =============================================================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+*.swp
+
+# =============================================================
+# Database files (local SQLite, etc.)
+# =============================================================
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# =============================================================
+# Kiro / AI tooling
+# =============================================================
+.kiro/

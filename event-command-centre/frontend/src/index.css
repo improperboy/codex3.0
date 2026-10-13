@@ -164,3 +164,93 @@ input:focus, textarea:focus, select:focus { border-color: var(--blue-500); }
     transition-duration: .01ms !important;
   }
 }
+
+/* ================================================================
+   F7.3 Accessibility + F7.4 Responsive additions
+   ================================================================ */
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  z-index: 9999;
+  background: var(--blue-600);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top .15s;
+}
+.skip-link:focus { top: 8px; }
+
+/* Focus-visible rings — keyboard nav gets a clear ring, mouse gets none */
+:focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* Minimum touch target 44px on interactive controls */
+button { min-height: 44px; min-width: 44px; }
+input, textarea, select { min-height: 44px; }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+/* Side-nav accessible link height */
+nav a { min-height: 44px; }
+
+/* ── F7.4 Mobile responsive ── */
+/* Hide side nav on mobile, show on tablet+ */
+@media (max-width: 767px) {
+  .side-nav { display: none !important; }
+  .page { padding: 12px; }
+
+  /* KPI row horizontal scroll on mobile */
+  .kpi-row {
+    display: flex !important;
+    grid-template-columns: unset !important;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  .kpi-row > * {
+    min-width: 160px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  /* Stack 2-col layouts */
+  .grid-2 { grid-template-columns: 1fr !important; }
+
+  /* Prevent horizontal overflow on toast */
+  .toast { max-width: calc(100vw - 48px); right: 16px; bottom: 16px; }
+
+  /* Top bar wraps on mobile */
+  .top-bar-inner {
+    flex-wrap: wrap;
+    height: auto !important;
+    min-height: 56px;
+    padding: 8px 16px !important;
+    gap: 8px !important;
+  }
+}
+
+/* ── F7.5 Error state component ── */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 64px 24px;
+  text-align: center;
+}
+.error-state__icon  { font-size: 40px; }
+.error-state__title { font-size: 18px; font-weight: 600; color: var(--slate-800); }
+.error-state__msg   { color: var(--slate-500); max-width: 360px; font-size: 14px; }

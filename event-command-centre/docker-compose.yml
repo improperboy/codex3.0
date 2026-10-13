@@ -30,6 +30,8 @@ services:
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       SSE_IDLE_TIMEOUT_SECONDS: ${SSE_IDLE_TIMEOUT_SECONDS:-300}
+    ports:
+      - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
